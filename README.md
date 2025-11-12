@@ -1,6 +1,4 @@
 # 5a_Create_Socket_for_HTTP_for_webpage_upload_and_download
-### NAME : Kabira A
-### REG NO : 212224040146
 ## AIM :
 To write a PYTHON program for socket for HTTP for web page upload and download
 ## Algorithm
@@ -17,19 +15,16 @@ To write a PYTHON program for socket for HTTP for web page upload and download
 <BR>
 6.Stop the program
 <BR>
-
 ## Program 
-
-idle.py
-
 ```
+
 import socket
 def send_request(host, port, request):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((host, port))
         s.sendall(request.encode())
         response = s.recv(4096).decode()
-    return response
+        return response
 def upload_file(host, port, filename):
     with open(filename, 'rb') as file:
         file_data = file.read()
@@ -37,7 +32,7 @@ def upload_file(host, port, filename):
         request = f"POST /upload HTTP/1.1\r\nHost: {host}\r\nContent-Length: {content_length}\r\n\r\n"
         request += file_data.decode()
         response = send_request(host, port, request)
-    return response
+        return response
 def download_file(host, port, filename):
     request = f"GET /{filename} HTTP/1.1\r\nHost: {host}\r\n\r\n"
     response = send_request(host, port, request)
@@ -45,7 +40,6 @@ def download_file(host, port, filename):
     file_content = response.split('\r\n\r\n', 1)[1]
     with open(filename, 'wb') as file:
         file.write(file_content.encode())
-        
 if __name__ == "__main__":
     host = 'example.com'
     port = 80
@@ -55,12 +49,9 @@ if __name__ == "__main__":
     # Download file
     download_file(host, port, 'example.txt')
     print("File downloaded successfully.")
-
 ```
-
 ## OUTPUT
-
-![alt text](image.png)
+<img width="1053" height="486" alt="image" src="https://github.com/user-attachments/assets/1b469e41-b339-418f-9e8a-2857a3563b2b" />
 
 ## Result
 Thus the socket for HTTP for web page upload and download created and Executed
